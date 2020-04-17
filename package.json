@@ -54,6 +54,6 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-staged": "^1.0.1",
     "husky": "^4.2.3",
-    "prettier": "^2.0.2"
+    "prettier": "^2.0.4"
   }
 }
