@@ -13,7 +13,7 @@ class App extends Component {
     return data[Math.floor(Math.random() * data.length)];
   };
 
-  formatPassword = (pass) => (pass = pass.replace('_', '').toLowerCase());
+  formatPassword = (pass) => pass.replace('_', '').toLowerCase();
 
   getData = () =>
     fetch(`../data/${this.state.passPath}`)

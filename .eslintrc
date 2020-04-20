@@ -25,6 +25,11 @@
     "import/prefer-default-export": 0,
     "react/state-in-constructor": 0,
     "react/require-default-props": 0,
-    "default-case": 0
+    "default-case": 0,
+    "react/destructuring-assignment": 0,
+    "no-plusplus": 0,
+    "no-unused-expressions": 0,
+    "no-return-assign": 0,
+    "react/button-has-type": 0
   }
 }
