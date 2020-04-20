@@ -1,6 +1,9 @@
 .copy__btn {
+  display: block;
   align-self: center;
-  padding: 5px 15px;
+  width: 50px;
+  height: 30px;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
+  background-color: red;
 }

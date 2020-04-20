@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './CopyBtn.module.scss';
 
-// copyPassword() is copying password to clipboard
-
 const copyPassword = () => {
   const pass = document.getElementsByTagName('article')[0];
   const tempArea = document.createElement('textarea');

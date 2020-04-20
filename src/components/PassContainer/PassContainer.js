@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './PassContainer.module.scss';
 import CopyBtn from 'components/CopyBtn/CopyBtn';
+import GenerateBtn from 'components/GenerateBtn/GenerateBtn';
+import styles from './PassContainer.module.scss';
 
 const PassContainer = ({ pass, getData }) => {
   return (
     <div className={styles.wrapper}>
-      <article className={styles.container} onClick={getData}>
-        {pass}
-      </article>
+      <GenerateBtn getData={getData} />
+      <article className={styles.container}>{pass}</article>
+
       <CopyBtn />
     </div>
   );
