@@ -19,3 +19,41 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.generate__btn {
+  align-self: center;
+  border: none;
+  border-radius: 25px;
+  width: 300px;
+  height: 30px;
+  color: #ffffff;
+  background-color: #1abc9c;
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin: 10px 0;
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+}
+
+.copy__btn {
+  align-self: center;
+  width: 60px;
+  height: 24px;
+  border: none;
+  border-radius: 25px;
+  color: #ffffff;
+  background-color: #1abc9c;
+}

@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import styles from './App.module.scss';
+import Btn from 'components/Btn/Btn';
 import PassContainer from './components/PassContainer/PassContainer';
+import styles from './App.module.scss';
 
 class App extends Component {
   state = {
-    pass: 'tu będzie hasło',
+    pass: '',
     passLength: 4,
     passPath: 'words',
   };
 
-  handleRandom = (data) => {
-    return data[Math.floor(Math.random() * data.length)];
-  };
+  handleRandom = (data) => data[Math.floor(Math.random() * data.length)];
 
   formatPassword = (pass) => pass.replace('_', '').toLowerCase();
 
@@ -38,9 +37,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className={styles.App}>
-        <h1>password generator</h1>
-        <PassContainer getData={this.getData} pass={this.state.pass} />
+      <div className={styles.app}>
+        <PassContainer pass={this.state.pass} />
+        <Btn
+          className={styles.generate__btn}
+          onClick={this.getData}
+          active
+          text='generuj hasło'
+        />
       </div>
     );
   }
