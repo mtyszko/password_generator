@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Btn from 'components/Btn/Btn';
-import styles from './PassContainer.module.scss';
+import styles from './PassContainerSection.module.scss';
 
 const copyPassword = () => {
   const pass = document.getElementsByTagName('article')[0];
@@ -13,17 +13,17 @@ const copyPassword = () => {
   pass.removeChild(tempArea);
 };
 
-const PassContainer = ({ pass }) => {
+const PassContainerSection = ({ pass }) => {
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <article className={styles.container}>{pass}</article>
       <Btn className={styles.copy__btn} onClick={copyPassword} text='kopiuj' />
-    </div>
+    </section>
   );
 };
 
-PassContainer.propTypes = {
+PassContainerSection.propTypes = {
   pass: PropTypes.string.isRequired,
 };
 
-export default PassContainer;
+export default PassContainerSection;
