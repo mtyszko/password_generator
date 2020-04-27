@@ -11,10 +11,15 @@ const Input = ({
   label,
   className,
   placeholder,
+  defaultChecked,
+  error,
 }) => (
   <div className={className}>
     <label className={className} htmlFor={passType}>
-      <span className={className}>{label}</span>
+      <span className={className}>
+        {label}
+        <span>{error}</span>
+      </span>
       <input
         type={type}
         id={passType}
@@ -24,6 +29,7 @@ const Input = ({
         onChange={onChange}
         className={className}
         placeholder={placeholder}
+        defaultChecked={defaultChecked}
       />
       <figure className={className}></figure>
     </label>
@@ -39,6 +45,8 @@ Input.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string,
   name: PropTypes.string,
+  defaultChecked: PropTypes.bool,
+  error: PropTypes.string,
 };
 
 export default Input;

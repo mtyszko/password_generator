@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable prefer-destructuring */
 import React, { Component } from 'react';
 import Btn from 'components/Btn/Btn';
@@ -13,6 +14,7 @@ class App extends Component {
     separator: '_',
     capitalize: false,
     addNumber: false,
+    error: '',
   };
 
   handleRandom = (data) => data[Math.floor(Math.random() * data.length)];
@@ -24,37 +26,57 @@ class App extends Component {
     const newWord = this.state.capitalize
       ? word.replace(firstLetter, newFirstLetter)
       : word.toLowerCase();
-    console.log(newWord);
     return newWord;
   };
 
   formatPassword = (pass) => pass.replace(`${this.state.separator}`, '');
 
-  getPassword = () =>
-    fetch(`../data/${this.state.passType}`)
-      .then((res) => res.json())
-      .then((res) => {
-        let pass = '';
-        for (let i = 0; i < this.state.passLength; i++) {
-          this.state.passType === 'chars'
-            ? (pass += this.handleRandom(res))
-            : (pass += `${this.state.separator}${this.handleWord(res)}`);
-        }
-        this.state.passType === 'words'
-          ? (pass = `${this.formatPassword(pass)}${this.addNumberToPass()}`)
-          : console.log(null);
-        return pass;
-      })
-      .then((pass) => {
-        this.setState({
-          pass,
-        });
-      });
+  getPassword = () => {
+    return this.state.error
+      ? null
+      : fetch(`../data/${this.state.passType}`)
+          .then((res) => res.json())
+          .then((res) => {
+            let pass = '';
+            for (let i = 0; i < this.state.passLength; i++) {
+              this.state.passType === 'chars'
+                ? (pass += this.handleRandom(res))
+                : (pass += `${this.state.separator}${this.handleWord(res)}`);
+            }
+            this.state.passType === 'words'
+              ? (pass = `${this.formatPassword(pass)}${this.addNumberToPass()}`)
+              : console.log(null);
+            return pass;
+          })
+          .then((pass) => {
+            this.setState({
+              pass,
+            });
+          });
+  };
+
+  handlePassType = (e) => {
+    const passType = e.target.value;
+    document.getElementsByName('passLength')[0].value = '';
+    this.setState({
+      passLength: passType === 'chars' ? 12 : 4,
+      passType: e.target.value,
+      error: '',
+    });
+  };
 
   handleInput = (e) => {
     const name = e.target.name;
+    console.log(name);
+    const passType = this.state.passType;
+    const error =
+      passType === 'chars'
+        ? this.validate(e.target.value, 4, 32)
+        : this.validate(e.target.value, 2, 8);
+
     this.setState({
       [name]: e.target.value,
+      error: name === 'passLength' ? error : '',
     });
   };
 
@@ -66,7 +88,15 @@ class App extends Component {
   };
 
   addNumberToPass = () =>
-    this.state.addNumber ? Math.floor(Math.random() * 9) : null;
+    this.state.addNumber
+      ? `${this.state.separator}${Math.floor(Math.random() * 9)}`
+      : null;
+
+  validate = (num, min, max) => {
+    return isNaN(num) || num < min || num > max
+      ? `  podaj liczbę od ${min} do ${max}!!`
+      : '';
+  };
 
   render() {
     return (
@@ -84,6 +114,9 @@ class App extends Component {
           passType={this.state.passType}
           handleInput={this.handleInput}
           handleCheckbox={this.handleCheckbox}
+          handlePassType={this.handlePassType}
+          handleSeparator={this.handleSeparator}
+          error={this.state.error}
         />
       </div>
     );

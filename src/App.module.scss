@@ -64,48 +64,4 @@ html {
     justify-content: space-around;
   }
 
-  .radio {
-
-    label.radio {
-      display: flex;
-      justify-content: space-around;
-      cursor: pointer;
-
-      span.radio {
-        line-height: 18px;
-        font-size: 13px;
-      }
-
-      input.radio {
-        visibility: hidden;
-      }
-
-      figure.radio {
-        width: 18px;
-        height: 18px;
-        border: 2px solid hsl(360, 0%, 50%);
-        border-radius: 50%;
-      }
-
-      input.radio:checked+span.radio {
-        color: #1abc9c;
-      }
-
-      input.radio:checked+figure.radio {
-        border: 2px solid #1abc9c;
-
-        &:after {
-          content: '';
-          display: block;
-          width: 10px;
-          height: 10px;
-          background-color: #1abc9c;
-          border-radius: 50%;
-          transform: translate(2px, 2px);
-        }
-      }
-
-
-    }
-  }
 }

@@ -2,12 +2,13 @@
   display: flex;
   justify-content: space-between;
   width: 310px;
-  height: 38px;
+  min-height: 38px;
   border-radius: 25px;
   background-color: hsl(360, 0%, 90%);
   padding: 0 5px;
   margin-bottom: 20px;
   box-shadow: 0 0 8px -4px hsl(360, 0%, 10%);
+  overflow: hidden;
 
   .container {
     padding: 5px 15px;
@@ -15,7 +16,11 @@
     overflow: hidden;
     text-align: center;
     word-wrap: break-word;
+    font-size: 14px;
 
+    // &::after {
+    //   content: '(...)'
+    // }
   }
 
   .copy__btn {
