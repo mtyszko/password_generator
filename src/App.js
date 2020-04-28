@@ -1,11 +1,11 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable prefer-destructuring */
 import React, { Component } from 'react';
-import Btn from 'components/Btn/Btn';
-import LangSection from 'sections/LangSection/LangSection';
-import PassContainerSection from 'sections/PassContainerSection/PassContainerSection';
-import OptionsSection from 'sections/OptionsSection/OptionsSection';
-import styles from 'App.module.scss';
+import Btn from './components/Btn/Btn';
+import LangSection from './sections/LangSection/LangSection';
+import PassContainerSection from './sections/PassContainerSection/PassContainerSection';
+import OptionsSection from './sections/OptionsSection/OptionsSection';
+import styles from './App.module.scss';
 
 class App extends Component {
   state = {
@@ -42,7 +42,7 @@ class App extends Component {
   getPassword = () => {
     return this.state.error
       ? null
-      : fetch(`../data/${this.state.passType}`)
+      : fetch(`../public/data/${this.state.passType}`)
           .then((res) => res.json())
           .then((res) => {
             let pass = '';
@@ -108,7 +108,7 @@ class App extends Component {
 
   handleLang = (lang) => {
     const passType = this.state.passType;
-    fetch(`../data/${lang}.json`)
+    fetch(`../public/data/${lang}.json`)
       .then((res) => res.json())
       .then((res) => {
         this.clearNumber();
@@ -125,6 +125,7 @@ class App extends Component {
     const {
       generate,
       recomended,
+      copy,
       words,
       chars,
       wordsNumber,
@@ -148,7 +149,11 @@ class App extends Component {
             />
           </section>
 
-          <PassContainerSection pass={pass} recomended={recomended} />
+          <PassContainerSection
+            pass={pass}
+            recomended={recomended}
+            copy={copy}
+          />
           <OptionsSection
             passType={passType}
             handleInput={this.handleInput}
