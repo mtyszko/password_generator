@@ -2,6 +2,7 @@
 /* eslint-disable prefer-destructuring */
 import React, { Component } from 'react';
 import Btn from 'components/Btn/Btn';
+import LangSection from 'sections/LangSection/LangSection';
 import PassContainerSection from 'sections/PassContainerSection/PassContainerSection';
 import OptionsSection from 'sections/OptionsSection/OptionsSection';
 import styles from 'App.module.scss';
@@ -15,7 +16,14 @@ class App extends Component {
     capitalize: false,
     addNumber: false,
     error: '',
+    lang: 'pl',
   };
+
+  componentDidMount() {
+    this.handleLang('pl');
+  }
+
+  clearNumber = () => (document.getElementsByName('passLength')[0].value = '');
 
   handleRandom = (data) => data[Math.floor(Math.random() * data.length)];
 
@@ -57,7 +65,7 @@ class App extends Component {
 
   handlePassType = (e) => {
     const passType = e.target.value;
-    document.getElementsByName('passLength')[0].value = '';
+    this.clearNumber();
     this.setState({
       passLength: passType === 'chars' ? 12 : 4,
       passType: e.target.value,
@@ -67,12 +75,13 @@ class App extends Component {
 
   handleInput = (e) => {
     const name = e.target.name;
+    const value = e.target.value;
     console.log(name);
     const passType = this.state.passType;
     const error =
       passType === 'chars'
-        ? this.validate(e.target.value, 4, 32)
-        : this.validate(e.target.value, 2, 8);
+        ? this.validate(value, 4, 32)
+        : this.validate(value, 2, 8);
 
     this.setState({
       [name]: e.target.value,
@@ -81,9 +90,8 @@ class App extends Component {
   };
 
   handleCheckbox = (e) => {
-    const name = e.target.name;
     this.setState({
-      [name]: e.target.checked,
+      [e.target.name]: e.target.checked,
     });
   };
 
@@ -94,30 +102,69 @@ class App extends Component {
 
   validate = (num, min, max) => {
     return isNaN(num) || num < min || num > max
-      ? `  podaj liczbę od ${min} do ${max}!!`
+      ? `  ${this.state.lang.errorMsg}${min} - ${max}`
       : '';
   };
 
+  handleLang = (lang) => {
+    const passType = this.state.passType;
+    fetch(`../data/${lang}.json`)
+      .then((res) => res.json())
+      .then((res) => {
+        this.clearNumber();
+        this.setState({
+          passLength: passType === 'chars' ? 12 : 4,
+          lang: res,
+          error: '',
+        });
+      });
+  };
+
   render() {
+    const { lang, pass, passType, error } = this.state;
+    const {
+      generate,
+      recomended,
+      words,
+      chars,
+      wordsNumber,
+      charsNumber,
+      separator,
+      firstLetter,
+      lastCharNumber,
+    } = this.state.lang;
     return (
       <div className={styles.app}>
-        <section className={styles.btn__wrapper}>
-          <Btn
-            className={styles.generate__btn}
-            onClick={this.getPassword}
-            text='generuj hasło'
-          />
-        </section>
+        <div className={styles.lang}>
+          <LangSection lang={lang} handleLang={this.handleLang} />
+        </div>
 
-        <PassContainerSection pass={this.state.pass} />
-        <OptionsSection
-          passType={this.state.passType}
-          handleInput={this.handleInput}
-          handleCheckbox={this.handleCheckbox}
-          handlePassType={this.handlePassType}
-          handleSeparator={this.handleSeparator}
-          error={this.state.error}
-        />
+        <div className={styles.main}>
+          <section className={styles.btn__wrapper}>
+            <Btn
+              className={styles.generate__btn}
+              onClick={this.getPassword}
+              text={generate}
+            />
+          </section>
+
+          <PassContainerSection pass={pass} recomended={recomended} />
+          <OptionsSection
+            passType={passType}
+            handleInput={this.handleInput}
+            handleCheckbox={this.handleCheckbox}
+            handlePassType={this.handlePassType}
+            error={error}
+            words={words}
+            chars={chars}
+            wordsNumber={wordsNumber}
+            charsNumber={charsNumber}
+            separator={separator}
+            firstLetter={firstLetter}
+            lastCharNumber={lastCharNumber}
+          />
+        </div>
+        <footer>&copy; mtdev</footer>
       </div>
     );
   }

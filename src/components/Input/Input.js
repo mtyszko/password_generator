@@ -41,7 +41,7 @@ Input.propTypes = {
   passType: PropTypes.string,
   isSelected: PropTypes.bool,
   onChange: PropTypes.func,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   className: PropTypes.string,
   placeholder: PropTypes.string,
   name: PropTypes.string,

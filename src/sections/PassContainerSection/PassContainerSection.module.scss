@@ -17,10 +17,6 @@
     text-align: center;
     word-wrap: break-word;
     font-size: 14px;
-
-    // &::after {
-    //   content: '(...)'
-    // }
   }
 
   .copy__btn {
@@ -42,4 +38,8 @@
       box-shadow: 6px 6px 12px -5px hsl(360, 0%, 30%);
     }
   }
+}
+
+.recomended {
+  padding: 5px 30px;
 }

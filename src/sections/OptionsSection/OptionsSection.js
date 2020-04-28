@@ -9,73 +9,82 @@ const OptionsSection = ({
   handleCheckbox,
   handlePassType,
   error,
-}) => (
-  <section className={styles.wrapper}>
-    <article className={styles.main}>
-      <Input
-        type='radio'
-        passType='words'
-        name='passType'
-        onChange={handlePassType}
-        label='słowa'
-        className={styles.checkbox}
-        defaultChecked
-      />
-      <Input
-        type='radio'
-        passType='chars'
-        name='passType'
-        onChange={handlePassType}
-        label='znaki'
-        className={styles.checkbox}
-      />
-    </article>
-    <article className={styles.details}>
-      {passType === 'chars' ? (
+  words,
+  chars,
+  charsNumber,
+  wordsNumber,
+  separator,
+  firstLetter,
+  lastCharNumber,
+}) => {
+  return (
+    <section className={styles.wrapper}>
+      <article className={styles.main}>
         <Input
-          name='passLength'
-          type='text'
-          label='ile znaków?'
-          className={styles.textbox}
-          onChange={handleInput}
-          error={error}
+          type='radio'
+          passType='words'
+          name='passType'
+          onChange={handlePassType}
+          label={words}
+          className={styles.checkbox}
+          defaultChecked
         />
-      ) : (
-        <>
+        <Input
+          type='radio'
+          passType='chars'
+          name='passType'
+          onChange={handlePassType}
+          label={chars}
+          className={styles.checkbox}
+        />
+      </article>
+      <article className={styles.details}>
+        {passType === 'chars' ? (
           <Input
             name='passLength'
             type='text'
-            label='ile słów?'
+            label={charsNumber}
             className={styles.textbox}
             onChange={handleInput}
             error={error}
           />
-          <Input
-            type='text'
-            name='separator'
-            label='separator'
-            className={styles.textbox}
-            onChange={handleInput}
-          />
-          <Input
-            type='checkbox'
-            name='capitalize'
-            label='pierwsza litera wielka?'
-            className={styles.checkbox}
-            onChange={handleCheckbox}
-          />
-          <Input
-            type='checkbox'
-            name='addNumber'
-            label='cyfra na końcu?'
-            className={styles.checkbox}
-            onChange={handleCheckbox}
-          />
-        </>
-      )}
-    </article>
-  </section>
-);
+        ) : (
+          <>
+            <Input
+              name='passLength'
+              type='text'
+              label={wordsNumber}
+              className={styles.textbox}
+              onChange={handleInput}
+              error={error}
+            />
+            <Input
+              type='text'
+              name='separator'
+              label={separator}
+              className={styles.textbox}
+              onChange={handleInput}
+            />
+            <Input
+              type='checkbox'
+              name='capitalize'
+              label={firstLetter}
+              className={styles.checkbox}
+              onChange={handleCheckbox}
+            />
+            <Input
+              type='checkbox'
+              name='addNumber'
+              label={lastCharNumber}
+              className={styles.checkbox}
+              onChange={handleCheckbox}
+            />
+          </>
+        )}
+      </article>
+    </section>
+  );
+};
 
 OptionsSection.propTypes = {
   passType: PropTypes.string,
@@ -83,5 +92,13 @@ OptionsSection.propTypes = {
   handleCheckbox: PropTypes.func,
   handlePassType: PropTypes.func,
   error: PropTypes.string,
+  words: PropTypes.string,
+  chars: PropTypes.string,
+  charsNumber: PropTypes.string,
+  wordsNumber: PropTypes.string,
+  separator: PropTypes.string,
+  firstLetter: PropTypes.string,
+  lastCharNumber: PropTypes.string,
 };
+
 export default OptionsSection;

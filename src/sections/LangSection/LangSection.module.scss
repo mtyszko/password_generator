@@ -15,16 +15,18 @@
   }
 }
 
-.wrapper {
-  align-self: center;
-  margin: 20px 0;
-  font-size: 13px;
+.main {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 40px 0;
 
-  .main,
-  .details {
+  label {
     display: flex;
-    justify-content: space-between;
-    margin: 20px 0 40px 0;
+    justify-content: space-around;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 0 10px;
 
     input:focus {
       outline: none;
@@ -64,51 +66,4 @@
       }
     }
   }
-
-  .main {
-    label {
-      display: flex;
-      justify-content: space-around;
-      cursor: pointer;
-    }
-
-    label.checkbox {
-      span.checkbox {
-        line-height: 18px;
-        font-size: 13px;
-      }
-    }
-  }
-
-  .details {
-    width: 250px;
-    height: 100px;
-    flex-direction: column;
-
-    label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-
-      input.textbox {
-        width: 20px;
-        height: 16px;
-        border: 2px solid hsl(360, 0%, 50%);
-        border-radius: 5px;
-        text-align: center;
-      }
-
-      figure.textbox {
-        display: none;
-      }
-
-      span.textbox span {
-        color: red;
-        font-size: 8px;
-      }
-
-    }
-  }
-
-
 }

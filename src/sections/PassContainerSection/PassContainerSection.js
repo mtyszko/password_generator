@@ -4,6 +4,7 @@ import Btn from 'components/Btn/Btn';
 import styles from './PassContainerSection.module.scss';
 
 const copyPassword = () => {
+  console.log('coś');
   const pass = document.getElementsByTagName('article')[0];
   const tempArea = document.createElement('textarea');
   pass.appendChild(tempArea);
@@ -13,17 +14,25 @@ const copyPassword = () => {
   pass.removeChild(tempArea);
 };
 
-const PassContainerSection = ({ pass }) => {
+const PassContainerSection = ({ pass, recomended }) => {
   return (
-    <section className={styles.wrapper}>
-      <article className={styles.container}>{pass}</article>
-      <Btn className={styles.copy__btn} onClick={copyPassword} text='kopiuj' />
-    </section>
+    <>
+      <section className={styles.wrapper}>
+        <article className={styles.container}>{pass}</article>
+        <Btn
+          className={styles.copy__btn}
+          onClick={copyPassword}
+          text='kopiuj'
+        />
+      </section>
+      <div className={styles.recomended}>{recomended}</div>
+    </>
   );
 };
 
 PassContainerSection.propTypes = {
   pass: PropTypes.string.isRequired,
+  recomended: PropTypes.string,
 };
 
 export default PassContainerSection;
