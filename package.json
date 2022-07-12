@@ -1,0 +1,22 @@
+{
+  "name": "password_generator",
+  "version": "4.0.0",
+  "description": "password generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtyszko/password_generator.git"
+  },
+  "keywords": [
+    "password"
+  ],
+  "author": "mtdev",
+  "license": "BSD 3-Clause License",
+  "bugs": {
+    "url": "https://github.com/mtyszko/password_generator/issues"
+  },
+  "homepage": "https://github.com/mtyszko/password_generator#readme"
+}
